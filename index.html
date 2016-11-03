@@ -16,9 +16,11 @@
 		var light = new THREE.AmbientLight(0xffffff, 0.5);
 		scene.add(light);
 
-		var material = new THREE.MeshLambertMaterial({
+		var material = new THREE.MeshBasicMaterial({
 			map: new THREE.TextureLoader().load('images/demo.jpg'),
-			side: THREE.DoubleSide
+			side: THREE.DoubleSide,
+			transparent: true,
+			opacity: 0.3
 		});
 
 		var scans = new THREE.Object3D();
