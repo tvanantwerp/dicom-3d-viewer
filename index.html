@@ -27,7 +27,6 @@
 				prefix = '0';
 			}
 			var path = 'images/axial/IN000' + prefix + i + '.png';
-			console.log(path);
 			var geometry = new THREE.PlaneGeometry(100, 50);
 
 			var material = new THREE.MeshBasicMaterial({
@@ -36,7 +35,8 @@
 				),
 				side: THREE.DoubleSide,
 				transparent: true,
-				opacity: 0.1
+				opacity: 0.1,
+				blending: THREE.AdditiveBlending
 			});
 
 			var scan = new THREE.Mesh( geometry, material );
