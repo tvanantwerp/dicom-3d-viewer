@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DICOM 3D Viewer</title>
+</head>
+<body>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+	<script>
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		var renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		var light = new THREE.AmbientLight(0xffffff, 0.5);
+		scene.add(light);
+
+		var material = new THREE.MeshLambertMaterial({
+			map: new THREE.TextureLoader().load('images/demo.jpg'),
+			side: THREE.DoubleSide
+		});
+
+		var scans = new THREE.Object3D();
+		scene.add(scans);
+
+		for (var i = 0, j = 5; i < j; i++) {
+			var geometry = new THREE.PlaneGeometry(100, 50);
+
+			var scan = new THREE.Mesh( geometry, material );
+			scan.position.z = -10 * i;
+			scans.add(scan);
+		}
+		
+		camera.position.z = 100;
+
+		function render () {
+			requestAnimationFrame(render);
+
+			scans.rotation.x += 0.01;
+			scans.rotation.y += 0.01;
+			renderer.render(scene, camera);
+		}
+		render();
+	</script>
+</body>
+</html>
