@@ -16,21 +16,31 @@
 		var light = new THREE.AmbientLight(0xffffff, 0.5);
 		scene.add(light);
 
-		var material = new THREE.MeshBasicMaterial({
-			map: new THREE.TextureLoader().load('images/demo.jpg'),
-			side: THREE.DoubleSide,
-			transparent: true,
-			opacity: 0.3
-		});
-
 		var scans = new THREE.Object3D();
 		scene.add(scans);
 
-		for (var i = 0, j = 5; i < j; i++) {
+		for (var i = 4, j = 114; i < j; i++) {
+			var prefix = '';
+			if (i < 10) {
+				prefix = '00';
+			} else if (i < 100) {
+				prefix = '0';
+			}
+			var path = 'images/axial/IN000' + prefix + i + '.png';
+			console.log(path);
 			var geometry = new THREE.PlaneGeometry(100, 50);
 
+			var material = new THREE.MeshBasicMaterial({
+				map: new THREE.TextureLoader().load(
+					path
+				),
+				side: THREE.DoubleSide,
+				transparent: true,
+				opacity: 0.1
+			});
+
 			var scan = new THREE.Mesh( geometry, material );
-			scan.position.z = -10 * i;
+			scan.position.z = -1 * i;
 			scans.add(scan);
 		}
 		
